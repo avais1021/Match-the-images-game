@@ -1,34 +1,45 @@
-*{margin: 0; padding: 0; box-sizing: border-box;}
-
-:root{
-    --bg-main:#464646;
-    --bg-card:#2D2727;
-    --border-color:#efc745;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
+:root {
+    --bg-main: #464646;
+    --bg-card: #2D2727;
+    --border-color: #efc745;
+}
+
+body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
     min-height: 100vh;
     background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
     padding-top: 80px;
 }
 
-h1{
+h1 {
     color: #5d2323;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 4rem;
 }
 
-span{
+span {
     color: #1e568e;
 }
 
-#card_section{
+.benifit {
+    font-size: 21px;
+    color: #00ffdc;
+    text-shadow: 0px 0px 14px black , 1px 1px black;
+    letter-spacing: 0.5px;
+}
+
+#card_section {
     display: grid;
-    grid-template-columns: repeat(4 , 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 0.5rem;
 }
 
@@ -53,51 +64,54 @@ span{
     border: 2px solid rgb(0, 206, 45);
 } */
 
-.card{
+.card {
     position: relative;
-    transition:  all .4s linear;
+    transition: all .4s linear;
     transform-style: preserve-3d;
 }
 
-.card,.backCard,.frontCard{
+.card, .backCard, .frontCard {
     height: 7rem;
     width: 7rem;
 }
 
-.backCard,.frontCard{
-    position: absolute ;
-    backface-visibility: hidden;   
+.backCard, .frontCard {
+    position: absolute;
+    backface-visibility: hidden;
 }
 
-.frontCard{
+.frontCard {
     background-image: linear-gradient(to right, #0a1718, #83a4d4);
     background-size: 75% 75% !important;
     border-radius: .6rem;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: 2rem;
-    
+
 }
-.backCard{
+
+.backCard {
     transform: rotateY(180deg);
     background-size: 75% 75% !important;
     border-radius: .6rem;
-    box-shadow: rgb(82 87 93 ) 0px 8px 18px;
+    box-shadow: rgb(82 87 93) 0px 8px 18px;
     padding: 2rem;
 }
-.card_selected{
+
+.card_selected {
     transform: rotateY(180deg);
 }
 
-.match .frontCard{
+.match .frontCard {
     background-image: linear-gradient(to right, #1f2d27, #14f627);
 }
 
-@media screen and (max-width:550.9px){
-    .card,.backCard,.frontCard{
+@media screen and (max-width:550.9px) {
+    .card, .backCard, .frontCard {
         height: 4rem;
         width: 4rem;
     }
-    h1{
+
+    h1 {
         font-size: 2rem;
     }
 }
