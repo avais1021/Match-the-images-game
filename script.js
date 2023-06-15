@@ -27,6 +27,8 @@ let cardArray = [
 ]
 console.log(cardArray);
 
+
+
 let card_section = document.querySelector('#card_section');
 
 const gameCard = cardArray.concat(cardArray);
@@ -40,12 +42,36 @@ shuffleArray.sort(() => {
 })
 console.log("abz", shuffleArray);
 
+for (let i = 0; i < shuffleArray.length; i++) {
+    const childDiv = document.createElement('div');
+    childDiv.classList.add('card')
+    childDiv.dataset.name = shuffleArray[i].name;
+    // childDiv.style.background = `url(${shuffleArray[i].img}) no-repeat center center/cover`;
+
+    const frontDiv = document.createElement('div');
+    frontDiv.classList.add('frontCard');
+    childDiv.appendChild(frontDiv)
+
+    const backDiv = document.createElement('div');
+    backDiv.classList.add('backCard')
+    childDiv.appendChild(backDiv);
+
+    backDiv.style.background = `url(${shuffleArray[i].img}) no-repeat center `;
+
+
+    card_section.appendChild(childDiv);
+}
+
+
 
 // step 4
 
 let clickCount = 0;
 let firstCard = '';
 let secondCard = '';
+var wrongCounter = 0;
+var chanceCount = 5;
+var chance = document.querySelector('.chance');
 
 const card_maches = () => {
     let card_selected = document.querySelectorAll('.card_selected');
@@ -53,6 +79,8 @@ const card_maches = () => {
         currEle.classList.add('match');
     })
 }
+
+
 
 // reset the game 
 const reset_game = () => {
@@ -67,7 +95,7 @@ const reset_game = () => {
 }
 
 card_section.addEventListener('click', (event) => {
-    console.log(event.target);
+    // console.log(event.target);
     let curCard = event.target;
 
     if (curCard.id === 'card_section') {
@@ -80,48 +108,63 @@ card_section.addEventListener('click', (event) => {
         if (clickCount === 1) {
             firstCard = curCard.parentNode.dataset.name;
             curCard.parentNode.classList.add('card_selected')
-            console.log(clickCount);
+            // console.log(clickCount);
         } else {
             secondCard = curCard.parentNode.dataset.name;
             curCard.parentNode.classList.add('card_selected')
-            console.log(clickCount);
+            // console.log(clickCount);
         }
 
         if (firstCard !== "" && secondCard !== "") {
             if (firstCard === secondCard) {
                 // curCard.classList.add('match');
-                setTimeout(()=>{
+                setTimeout(() => {
                     card_maches();
                     reset_game();
-                } , 1000)
+                }, 1000)
             } else {
-                setTimeout(()=>{
+                setTimeout(() => {
                     reset_game();
-                } , 1000)
+                    wrongCounter++;
+                    console.log(wrongCounter);
+                    if (wrongCounter > 4) {
+                        card_section.style.display = "none";
+                        congrast.style.display = 'block';
+                    }
+                    chance.innerHTML = --chanceCount;
+                    console.log(chanceCount);
+                    // console.log('notmatch');
+                }, 1000)
             }
         }
     }
 
 
+    let congrast = document.querySelector('.congrast');
+    setTimeout(() => {
+
+        const allcards = document.querySelectorAll('.card');
+        for (let i = 0; i < allcards.length; i++) {
+            if (allcards[i].classList.contains('match')) {
+                const allMatches = document.querySelectorAll('.match');
+                if (allcards.length == allMatches.length) {
+                    console.log('Good job');
+                    // alert("You Won The Game")
+                    card_section.style.display = "none";
+                    congrast.style.display = 'block';
+                    break;
+
+                }
+            }
+        }
+    }, 2000)
+
+
 })
 
 
-for (let i = 0; i < shuffleArray.length; i++) {
-    const childDiv = document.createElement('div');
-    childDiv.classList.add('card')
-    childDiv.dataset.name = shuffleArray[i].name;
-    // childDiv.style.background = `url(${shuffleArray[i].img}) no-repeat center center/cover`;
 
-    const frontDiv = document.createElement('div'); 
-    frontDiv.classList.add('frontCard');
-    childDiv.appendChild(frontDiv)
+document.getElementById('reset').addEventListener('click', () => {
+    window.location.reload();
+})
 
-    const backDiv = document.createElement('div'); 
-    backDiv.classList.add('backCard')
-    childDiv.appendChild(backDiv);
-
-    backDiv.style.background = `url(${shuffleArray[i].img}) no-repeat center `;
-
-
-    card_section.appendChild(childDiv);
-}
