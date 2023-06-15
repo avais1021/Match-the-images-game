@@ -72,6 +72,9 @@ let secondCard = '';
 var wrongCounter = 0;
 var chanceCount = 5;
 var chance = document.querySelector('.chance');
+let congrast = document.querySelector('.congrast');
+let congimg = document.querySelector('.congimg');
+let gameOverImg = document.querySelector('.gameOverImg');
 
 const card_maches = () => {
     let card_selected = document.querySelectorAll('.card_selected');
@@ -130,6 +133,8 @@ card_section.addEventListener('click', (event) => {
                     if (wrongCounter > 4) {
                         card_section.style.display = "none";
                         congrast.style.display = 'block';
+                        gameOverImg.style.display = 'block';
+                        congimg.style.display = 'none'
                     }
                     chance.innerHTML = --chanceCount;
                     console.log(chanceCount);
@@ -140,7 +145,7 @@ card_section.addEventListener('click', (event) => {
     }
 
 
-    let congrast = document.querySelector('.congrast');
+
     setTimeout(() => {
 
         const allcards = document.querySelectorAll('.card');
@@ -152,6 +157,8 @@ card_section.addEventListener('click', (event) => {
                     // alert("You Won The Game")
                     card_section.style.display = "none";
                     congrast.style.display = 'block';
+                    congimg.style.display = 'block';
+                    gameOverImg.style.display = 'none';
                     break;
 
                 }
